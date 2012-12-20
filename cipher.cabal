@@ -45,7 +45,7 @@ Cabal-version:       >=1.2
 
 Library
   -- Modules exported by the library.
-  Exposed-modules:    Caesar, Main, Text
+  Exposed-modules:    Cipher, Text, Caesar, Atbash
 
   Hs-source-dirs:     src
 

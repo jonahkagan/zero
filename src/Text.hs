@@ -3,15 +3,18 @@ module Text where
 import Data.List
 
 class (Eq c, Show c) => Chr c
-instance Chr Char
 
-data Alphabet a = Alphabet { chars :: [a], seps :: [a] }
-type Text a = [a]
+data Alphabet c = Alphabet { chars :: [c], seps :: [c] }
+type Text c = [c]
 
-alphabet :: [a] -> [a] -> Alphabet a
+alphabet :: [c] -> [c] -> Alphabet c
 alphabet chars seps = Alphabet { chars = chars, seps = seps }
 
-mapWords :: (Eq a) => Alphabet a -> (Text a -> Text a) -> Text a -> Text a
+instance Chr Char
+basicAlpha :: Alphabet Char
+basicAlpha = alphabet "abcdefghijklmnopqrstuvwxyz" " "
+
+mapWords :: (Eq c) => Alphabet c -> (Text c -> Text c) -> Text c -> Text c
 mapWords alpha f text = helper text
   where
     isSep = flip elem $ seps alpha
@@ -20,10 +23,4 @@ mapWords alpha f text = helper text
       let (seps, rest) = span isSep text
           (word, rest') = span (not . isSep) rest
       in seps ++ f word ++ helper rest'
-  {-join (head s) . map f $ split s text-}
 
-basicAlpha = alphabet "abcdefghijklmnopqrstuvwxyz" " "
-
-skipSeps alpha f = mapWords alpha $ f alpha
-
-abc = skipSeps basicAlpha
