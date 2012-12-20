@@ -2,8 +2,6 @@ module Text where
 
 import Data.List
 
-{-import ListExt-}
-
 class (Eq c, Show c) => Chr c
 instance Chr Char
 
@@ -23,3 +21,9 @@ mapWords alpha f text = helper text
           (word, rest') = span (not . isSep) rest
       in seps ++ f word ++ helper rest'
   {-join (head s) . map f $ split s text-}
+
+basicAlpha = alphabet "abcdefghijklmnopqrstuvwxyz" " "
+
+skipSeps alpha f = mapWords alpha $ f alpha
+
+abc = skipSeps basicAlpha
