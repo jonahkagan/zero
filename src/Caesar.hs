@@ -1,14 +1,14 @@
-module Caesar (encode, decode, keys) where
+module Caesar (encipher, decipher, keys) where
 
 import Text
 import Cipher
 import Data.List
 
-encode :: (Chr c) => Int -> Cipher c c
-encode key = rot key
+encipher :: (Chr c) => Int -> Cipher c c
+encipher key = rot key
 
-decode :: (Chr c) => Int -> Cipher c c
-decode key = rot (-key)
+decipher :: (Chr c) => Int -> Cipher c c
+decipher key = rot (-key)
 
 keys :: Alphabet c -> [Int]
 keys alpha = [0..length $ chars alpha]

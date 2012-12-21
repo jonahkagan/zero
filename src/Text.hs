@@ -30,7 +30,6 @@ mapWords :: Eq ic =>
 mapWords alpha fword fseps text = helper text
   where
     isSep = flip elem $ seps alpha
-    {-helper :: Text ic -> Text oc-}
     helper [] = []
     helper text =
       let (seps, rest) = span isSep text

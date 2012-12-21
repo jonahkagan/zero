@@ -9,10 +9,5 @@ applyCipher :: (Chr ic, Chr oc) =>
   -> Text ic -> Text oc
 applyCipher alpha cipher fseps = mapWords alpha (cipher alpha) fseps
 
-applySameCharCipher :: (Chr c) =>
-  Alphabet c -> Cipher c c -> Text c -> Text c
-applySameCharCipher alpha cipher = applyCipher alpha cipher id
-
-fromAbc :: Cipher Char Char -> Text Char -> Text Char
-fromAbc = applySameCharCipher abc
-
+cipherFrom :: (Chr c) => Alphabet c -> Cipher c c -> Text c -> Text c
+cipherFrom alpha cipher = applyCipher alpha cipher id
