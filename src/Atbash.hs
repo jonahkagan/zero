@@ -1,17 +1,13 @@
-module Atbash (encode, decode) where
+module Atbash (encipher, decipher) where
 
 import Text
 import Cipher
 
-encode :: (Chr c) => Cipher c c
-encode alpha = map (flipChar alpha)
+encipher :: (Chr c) => Cipher c c
+encipher = subst . buildTable
 
-decode :: (Chr c) => Cipher c c
-decode = encode
+decipher :: (Chr c) => Cipher c c
+decipher = encipher
 
-flipChar :: (Chr c) => Alphabet c -> c -> c
-flipChar alpha c =
-  case lookup c $ zip charSet $ reverse charSet of
-    Just c' -> c'
-    Nothing -> error ("char not in alphabet: " ++ show c)
-  where charSet = chars alpha 
+buildTable :: Alphabet c -> Table c c
+buildTable alpha = zip cs (reverse cs) where cs = chars alpha
