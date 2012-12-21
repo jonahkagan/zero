@@ -4,10 +4,10 @@ import Text
 import Cipher
 import Data.List
 
-encode :: (Chr c) => Int -> Cipher c
+encode :: (Chr c) => Int -> Cipher c c
 encode key = rot key
 
-decode :: (Chr c) => Int -> Cipher c
+decode :: (Chr c) => Int -> Cipher c c
 decode key = rot (-key)
 
 keys :: Alphabet c -> [Int]

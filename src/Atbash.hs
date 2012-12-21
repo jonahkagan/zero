@@ -3,10 +3,10 @@ module Atbash (encode, decode) where
 import Text
 import Cipher
 
-encode :: (Chr c) => Cipher c
+encode :: (Chr c) => Cipher c c
 encode alpha = map (flipChar alpha)
 
-decode :: (Chr c) => Cipher c
+decode :: (Chr c) => Cipher c c
 decode = encode
 
 flipChar :: (Chr c) => Alphabet c -> c -> c
