@@ -17,11 +17,10 @@ keys alpha = [0..length $ chars alpha]
 {-rotAll ctext = [rot i ctext | i <- [0..alphaLen]]-}
 
 rot :: (Chr c) => Int -> Alphabet c -> Text c -> Text c
-rot n alpha = map $ rotChar n alpha
+rot n alpha = subst $ buildTable n alpha
 
-rotChar :: (Chr c) => Int -> Alphabet c -> c -> c
-rotChar n alpha c =
-  case elemIndex c charSet of
-    Just i -> charSet !! mod (n + i) (length charSet)
-    Nothing -> error ("char not in alphabet: " ++ show c)
+buildTable :: Int -> Alphabet c -> Table c c
+buildTable n alpha =
+  zip charSet (drop shift $ cycle charSet)
   where charSet = chars alpha
+        shift = n `mod` length charSet
